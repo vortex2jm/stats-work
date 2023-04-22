@@ -1,0 +1,23 @@
+============GREEN BAND
+TV-G/G = Audiência geral
+Open/ = Aberto
+Not Rated/NR/Unrated = Sem classificação
+nan
+Passed - aprovado para exibição
+Approved - moral/imoral
+
+============YELLOW BAND
+PG = Os pais decidem se a criança ve ou nao ve
+GP = Audiência geral com aprovação dos pais para pre adolescentes
+
+PG-13 = Crianças abaixo de 13 anos só veem com aprovação dos pais
+
+TV-14 = Inapropriado para menores de 14 anos
+
+TV-Y7 = Programa feito para crianças a partir de 7 anos
+TV-Y7-FV = Programa feito para crianças a partir de 7 anos (Fantasias com violência)
+
+R = Restrito (menores de 17 apenas com adultos)
+============RED BAND
+TV-MA/X = Audiência madura (inapropriado para publico abaixo de 17 anos)
+NC-17/AO = Para maiores de 18 anos

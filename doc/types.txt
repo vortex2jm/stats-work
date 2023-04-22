@@ -1,0 +1,1 @@
+['| PG-13', '| Not Rated', '| R', '| Approved', '| TV-PG', '| TV-G', '| Passed', '| GP', '| M', '| M/PG', '| PG', '| G', '| TV-MA', nan, '| Unrated', '| TV-14', '| NC-17', '| NR', '| Open', '| X', '| PG--13', '| AO', '| PG-13`', '| TV-Y7', '| TV-Y7-FV']

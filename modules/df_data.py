@@ -239,3 +239,34 @@ for x in range(len(avarage_rating_by_year)):
     avarage_rating_by_year[x] = round(avarage_rating_by_year[x],2)
 
 # print(avarage_rating_by_year)
+
+#================================
+df_green = df
+df_green = df_green[df_green['Rating'].apply(lambda x: green_band.__contains__(x))]
+
+green_label_amount = len(df_green.index)
+
+df_yellow = df
+df_yellow = df_yellow[df_yellow['Rating'].apply(lambda x: yellow_band.__contains__(x))]
+
+yellow_label_amount = len(df_yellow.index)
+
+df_red = df
+df_red = df_red[df_red['Rating'].apply(lambda x: red_band.__contains__(x))]
+
+red_label_amount = len(df_red.index)
+
+#================================
+
+green_band_rating_percentage = [0]*12
+yellow_band_rating_percentage = [0]*12
+red_band_rating_percentage = [0]*12
+
+for i, x in enumerate(green_band_rating_amount):
+    green_band_rating_percentage[i] = 100*(x/green_label_amount)
+
+for i, x in enumerate(yellow_band_rating_amount):
+    yellow_band_rating_percentage[i] = 100*(x/yellow_label_amount)
+
+for i, x in enumerate(red_band_rating_amount):
+    red_band_rating_percentage[i] = 100*(x/red_label_amount)

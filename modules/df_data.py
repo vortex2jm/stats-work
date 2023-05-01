@@ -263,10 +263,10 @@ yellow_band_rating_percentage = [0]*12
 red_band_rating_percentage = [0]*12
 
 for i, x in enumerate(green_band_rating_amount):
-    green_band_rating_percentage[i] = 100*(x/green_label_amount)
+    green_band_rating_percentage[i] = round(100*(x/green_label_amount),2)
 
 for i, x in enumerate(yellow_band_rating_amount):
-    yellow_band_rating_percentage[i] = 100*(x/yellow_label_amount)
+    yellow_band_rating_percentage[i] = round(100*(x/yellow_label_amount),2)
 
 for i, x in enumerate(red_band_rating_amount):
-    red_band_rating_percentage[i] = 100*(x/red_label_amount)
+    red_band_rating_percentage[i] = round(100*(x/red_label_amount),2)

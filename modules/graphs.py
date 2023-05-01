@@ -3,9 +3,9 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 colors_scheme = {
-    'background': '#555555',
+    'background': '#232323',
     'text': '#FFFFFF',
-    'band_colors': ['green', 'yellow', 'red']
+    'band_colors': ['#317A24', '#FFF000', '#B10505']
 }
 
 # =============================
@@ -15,7 +15,7 @@ amount_per_rating_graph = go.Figure(data=[go.Bar(
     y=df.amount_per_rating, 
     text=df.amount_per_rating, 
     textposition='auto', 
-    marker_color='magenta'
+    marker_color='#AA14FF'
 )])
 amount_per_rating_graph.update_layout(
     # title_text='Quantidade de filmes por nota de avaliação',
@@ -41,9 +41,30 @@ band_rating_label = amount_per_rating_label
 specs = [[{}, {}, {}]]
 
 gbr_graph = make_subplots(rows=1, cols=3, specs=specs)
-gbr_graph.add_trace(go.Bar(name='Verde',x=band_rating_label, y=df.green_band_rating_percentage, marker=dict(color='green')), 1, 1)
-gbr_graph.add_trace(go.Bar(name='Amarela',x=band_rating_label, y=df.yellow_band_rating_percentage, marker=dict(color='yellow')), 1, 2)
-gbr_graph.add_trace(go.Bar(name='Vermelha',x=band_rating_label, y=df.red_band_rating_percentage, marker=dict(color='red')), 1, 3)
+gbr_graph.add_trace(go.Bar(
+    name='Verde',
+    x=band_rating_label, 
+    y=df.green_band_rating_percentage, 
+    marker=dict(color=colors_scheme['band_colors'][0]),
+    text=df.green_band_rating_percentage,
+    textposition='outside'    
+),1, 1)
+gbr_graph.add_trace(go.Bar(
+    name='Amarela',
+    x=band_rating_label, 
+    y=df.yellow_band_rating_percentage, 
+    marker=dict(color=colors_scheme['band_colors'][1]),
+    text= df.yellow_band_rating_percentage,
+    textposition='outside'   
+), 1, 2)
+gbr_graph.add_trace(go.Bar(
+    name='Vermelha',
+    x=band_rating_label, 
+    y=df.red_band_rating_percentage, 
+    marker=dict(color=colors_scheme['band_colors'][2]),
+    text= df.red_band_rating_percentage,
+    textposition='outside'
+), 1, 3)
 
 # gbr_graph.update_traces(hole=.4)
 gbr_graph.update_layout(
@@ -63,9 +84,30 @@ date_range = ['1926 - 1930', '1931 - 1940', '1941 - 1950', '1951 - 1960', '1961 
 specs = [[{}, {}, {}]]
 
 gb_date_graph = make_subplots(rows=1, cols=3, specs=specs)
-gb_date_graph.add_trace(go.Bar(name='Verde',x=date_range, y=df.gree_band_years, marker=dict(color='green')), 1, 1)
-gb_date_graph.add_trace(go.Bar(name='Amarela',x=date_range, y=df.yellow_band_years, marker=dict(color='yellow')), 1, 2)
-gb_date_graph.add_trace(go.Bar(name='Vermelha',x=date_range, y=df.red_band_years, marker=dict(color='red')), 1, 3)
+gb_date_graph.add_trace(go.Bar(
+    name='Verde',
+    x=date_range, 
+    y=df.gree_band_years, 
+    marker=dict(color=colors_scheme['band_colors'][0]),
+    text=df.gree_band_years,
+    textposition='outside'    
+), 1, 1)
+gb_date_graph.add_trace(go.Bar(
+    name='Amarela',
+    x=date_range, 
+    y=df.yellow_band_years, 
+    marker=dict(color=colors_scheme['band_colors'][1]),
+    text=df.yellow_band_years,
+    textposition='outside'
+), 1, 2)
+gb_date_graph.add_trace(go.Bar(
+    name='Vermelha',
+    x=date_range, 
+    y=df.red_band_years, 
+    marker=dict(color=colors_scheme['band_colors'][2]),
+    text=df.red_band_years,
+    textposition='outside'
+), 1, 3)
 # gb_date_graph.update_traces(hole=.4)
 gb_date_graph.update_layout(
     # title_text='Quantidade de filmes em cada classificação etária por data de lançamento',
@@ -82,7 +124,8 @@ rating_avarage_by_year_graph = go.Figure(data=[go.Bar(
     x=date_range, 
     y=df.avarage_rating_by_year, 
     text=df.avarage_rating_by_year,
-    textposition='auto'
+    textposition='auto',
+    marker_color='#AA14FF'
 )])
 rating_avarage_by_year_graph.update_layout(
     # title_text='Média das avaliações por data de lançamento',

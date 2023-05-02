@@ -5,7 +5,6 @@ from plotly.subplots import make_subplots
 colors_scheme = {
     'background': '#232323',
     'text': '#FFFFFF',
-    'dark_text': '#000000',
     'band_colors': ['#317A24', '#BBB000', '#B10505']
 }
 
@@ -67,7 +66,6 @@ gbr_graph.add_trace(go.Bar(
     textposition='outside'
 ), 1, 3)
 
-# gbr_graph.update_traces(hole=.4)
 gbr_graph.update_layout(
     # title_text='Avaliações em uma determinada faixa por classificação etária',
     annotations=[dict(text='', x=0.12, y=0.5, font_size=20, showarrow=False),
@@ -109,7 +107,7 @@ gb_date_graph.add_trace(go.Bar(
     text=df.red_band_years,
     textposition='outside'
 ), 1, 3)
-# gb_date_graph.update_traces(hole=.4)
+
 gb_date_graph.update_layout(
     # title_text='Quantidade de filmes em cada classificação etária por data de lançamento',
     annotations=[dict(text='', x=0.12, y=0.5, font_size=20, showarrow=False),
@@ -155,7 +153,7 @@ yellow_rating_avarage_by_year_graph = go.Figure(data=[go.Bar(
     x=date_range, 
     y=df.yellow_average_rating_per_decade, 
     text=df.yellow_average_rating_per_decade,
-    textfont=dict(color=colors_scheme['dark_text']),
+    textfont=dict(color=colors_scheme['text']),
     textposition='auto',
     marker_color=colors_scheme['band_colors'][1]
 )])
@@ -163,7 +161,7 @@ yellow_rating_avarage_by_year_graph.update_layout(
     # title_text='Média das avaliações por data de lançamento',
     plot_bgcolor=colors_scheme['background'],
     paper_bgcolor=colors_scheme['background'],
-    font_color=colors_scheme['dark_text']
+    font_color=colors_scheme['text']
 )
 
 # =============================
@@ -171,7 +169,7 @@ red_rating_avarage_by_year_graph = go.Figure(data=[go.Bar(
     x=date_range, 
     y=df.red_average_rating_per_decade, 
     text=df.red_average_rating_per_decade,
-    textfont=dict(color=colors_scheme['dark_text']),
+    textfont=dict(color=colors_scheme['text']),
     textposition='auto',
     marker_color=colors_scheme['band_colors'][2]
 )])
@@ -179,7 +177,7 @@ red_rating_avarage_by_year_graph.update_layout(
     # title_text='Média das avaliações por data de lançamento',
     plot_bgcolor=colors_scheme['background'],
     paper_bgcolor=colors_scheme['background'],
-    font_color=colors_scheme['dark_text']
+    font_color=colors_scheme['text']
 )
 
 # =============================

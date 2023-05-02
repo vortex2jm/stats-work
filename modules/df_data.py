@@ -1,3 +1,4 @@
+import math
 import pandas as pd
 from modules.util import get_index_by_rating, get_index_by_year
 
@@ -243,16 +244,32 @@ for x in range(len(avarage_rating_by_year)):
 #================================
 df_green = df
 df_green = df_green[df_green['Rating'].apply(lambda x: green_band.__contains__(x))]
+    #Muda o tipo da coluna data
+df_green['Release Date'] = pd.to_datetime(df_green['Release Date'], errors="coerce", format="mixed")
+    #Cria coluna so com os anos
+df_green['Release Year'] = df_green['Release Date'].dt.year
+    #Ajusta anos maiores que 2023
+df_green['Release Year'] = df_green['Release Year'].apply(lambda x: x if x <= 2023 else x-100 if x>2023 and x<2100 else x - 1000)
+
+df_green['User rating'] = pd.to_numeric(df_green['User rating'], errors='coerce')
 
 green_label_amount = len(df_green.index)
 
 df_yellow = df
 df_yellow = df_yellow[df_yellow['Rating'].apply(lambda x: yellow_band.__contains__(x))]
+df_yellow['Release Date'] = pd.to_datetime(df_yellow['Release Date'], errors="coerce")
+df_yellow['Release Year'] = df_yellow['Release Date'].dt.year
+df_yellow['Release Year'] = df_yellow['Release Year'].apply(lambda x: x if x <= 2023 else x-100 if x>2023 and x<2100 else x - 1000)
+df_yellow['User rating'] = pd.to_numeric(df_yellow['User rating'], errors='coerce')
 
 yellow_label_amount = len(df_yellow.index)
 
 df_red = df
 df_red = df_red[df_red['Rating'].apply(lambda x: red_band.__contains__(x))]
+df_red['Release Date'] = pd.to_datetime(df_red['Release Date'], errors="coerce")
+df_red['Release Year'] = df_red['Release Date'].dt.year
+df_red['Release Year'] = df_red['Release Year'].apply(lambda x: x if x <= 2023 else x-100 if x>2023 and x<2100 else x - 1000)
+df_red['User rating'] = pd.to_numeric(df_red['User rating'], errors='coerce')
 
 red_label_amount = len(df_red.index)
 
@@ -270,3 +287,109 @@ for i, x in enumerate(yellow_band_rating_amount):
 
 for i, x in enumerate(red_band_rating_amount):
     red_band_rating_percentage[i] = round(100*(x/red_label_amount),2)
+
+#===============================
+
+#Quantidade de reviews em cada decada
+green_rating_per_decade = [0]*11
+green_total_rating_per_decade = [0]*11
+
+for i, row in df_green.iterrows():
+    try: 
+        arg = int(row['Release Year'])%100
+        score = float(row['User rating'])
+        if math.isnan(score):
+            continue
+    except:
+        continue
+    index = get_index_by_year(arg)
+
+    green_rating_per_decade[index] += 1
+    green_total_rating_per_decade[index] += float(row['User rating'])
+
+green_average_rating_per_decade = [0]*11
+for i, rating_total in enumerate(green_total_rating_per_decade):
+    green_average_rating_per_decade[i] = round(rating_total/green_rating_per_decade[i], 1)
+
+#vvvABANDONADOvvv#
+
+# #Soma de todas as notas em cada ano
+# green_total_rating_per_year = pd.Series(data=[0]*len(green_years), index=green_years)
+# for year in green_years:
+#     relevant_rows = df_green[df_green['Release Year'].apply(lambda x: x == year)]
+#     green_total_rating_per_year[year] = relevant_rows['User rating'].sum()
+
+# # Media das notas para cada ano
+# green_average_rating_per_year = pd.Series(data=round(green_total_rating_per_year/green_rating_per_year, 2), index=green_years)
+
+#===============================
+
+#Quantidade de reviews em cada decada
+yellow_rating_per_decade = [0]*11
+yellow_total_rating_per_decade = [0]*11
+
+for i, row in df_yellow.iterrows():
+    try: 
+        arg = int(row['Release Year'])%100
+        score = float(row['User rating'])
+        if math.isnan(score):
+            continue
+    except:
+        continue
+    index = get_index_by_year(arg)
+
+    yellow_rating_per_decade[index] += 1
+    yellow_total_rating_per_decade[index] += float(row['User rating'])
+
+yellow_average_rating_per_decade = [0]*11
+for i, rating_total in enumerate(yellow_total_rating_per_decade):
+    if yellow_rating_per_decade[i] != 0:
+        yellow_average_rating_per_decade[i] = round(rating_total/yellow_rating_per_decade[i], 1)
+
+#vvvABANDONADOvvv#
+# yellow_rating_per_year = df_yellow['Release Year'].groupby(df_yellow['Release Year']).count()
+
+# yellow_years = yellow_rating_per_year.index
+
+# yellow_total_rating_per_year = pd.Series(data=[0]*len(yellow_years), index=yellow_years)
+# for year in yellow_years:
+#     relevant_rows = df_yellow[df_yellow['Release Year'].apply(lambda x: x == year)]
+#     yellow_total_rating_per_year[year] = relevant_rows['User rating'].sum()
+
+# yellow_average_rating_per_year = pd.Series(data=round(yellow_total_rating_per_year/yellow_rating_per_year, 2), index=yellow_years)
+
+#===============================
+
+#Quantidade de reviews em cada decada
+red_rating_per_decade = [0]*11
+red_total_rating_per_decade = [0]*11
+
+for i, row in df_red.iterrows():
+    try: 
+        arg = int(row['Release Year'])%100
+        score = float(row['User rating'])
+        if math.isnan(score):
+            continue
+    except:
+        continue
+    index = get_index_by_year(arg)
+
+    red_rating_per_decade[index] += 1
+    red_total_rating_per_decade[index] += float(row['User rating'])
+
+
+red_average_rating_per_decade = [0]*11
+for i, rating_total in enumerate(red_total_rating_per_decade):
+    if red_rating_per_decade[i] != 0:
+        red_average_rating_per_decade[i] = round(rating_total/red_rating_per_decade[i], 1)
+
+# red_rating_per_year = df_red['Release Year'].groupby(df_red['Release Year']).count()
+
+# red_years = red_rating_per_year.index
+
+# red_total_rating_per_year = pd.Series(data=[0]*len(red_years), index=red_years)
+# for year in red_years:
+#     relevant_rows = df_red[df_red['Release Year'].apply(lambda x: x == year)]
+#     red_total_rating_per_year[year] = relevant_rows['User rating'].sum()
+
+# red_average_rating_per_year = pd.Series(data=round(red_total_rating_per_year/red_rating_per_year, 2), index=red_years)
